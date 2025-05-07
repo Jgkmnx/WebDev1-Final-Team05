@@ -10,14 +10,14 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB ***ADD MONFO DB***
-mongoose.connect("")
-then(()=>{
-    console.log('Connected to database')
-    })
-    .catch(()=>{
-    console.log('connection error')
-    })
-
+mongoose
+  .connect("mongodb+srv://jgkmnx:12345@fitness-connect.4ec2tbw.mongodb.net/?retryWrites=true&w=majority&appName=fitness-connect")
+  .then(() => {
+    console.log('Connected to database');
+  })
+  .catch((err) => {
+    console.log('Connection error:', err);
+  });
 
 // Mongoose Schema
 const UserSchema = new mongoose.Schema({
@@ -46,10 +46,27 @@ const PostSchema = new mongoose.Schema({
 
 const user = mongoose.model('User', UserSchema);
 const Workout = mongoose.model('Workout', WorkoutSchema);
-const Post = mongoose.modell('Post', PostSchema);
+const Post = mongoose.model('Post', PostSchema);
 
 //ADD ROUTES
-
+// Routes (examples)
+app.post('/signup', async (req, res) => {
+    // Handle signup with bcrypt
+  });
+  
+  app.post('/login', async (req, res) => {
+    // Handle login with JWT
+  });
+  
+  app.post('/workouts', async (req, res) => {
+    // Save workout entry
+  });
+  
+  app.get('/posts', async (req, res) => {
+    const posts = await Post.find({});
+    res.json(posts);
+  });
+  
 
 
 
